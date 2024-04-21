@@ -78,17 +78,13 @@ public class TS04ProductDisplayPageTest extends TestBase {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
 
-        for (Map.Entry<String, String> entry : products.entrySet()) {
-            String productName = entry.getKey();
-            String expectedDescription = entry.getValue();
-
+        products.forEach((productName, expectedDescription) -> {
             driver.findElement(By.linkText(loc.getProperty(productName))).click();
 
             WebElement description = driver.findElement(By.xpath(loc.getProperty("description_locator")));
-
             Assert.assertEquals(description.getText(), expectedDescription);
 
             driver.navigate().back();
-        }
+        });
     }
 }

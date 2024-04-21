@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -19,6 +18,9 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 @Listeners(utilities.Listeners.class)
 public class TestBase {
@@ -62,8 +64,7 @@ public class TestBase {
         driver.findElement(By.linkText(loc.getProperty("logIn_link"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        WebElement signUpWindow =
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("logIn_window"))));
+        WebElement signUpWindow = wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("logIn_window"))));
 
         if (signUpWindow.isDisplayed()) {
             System.out.println("Window is visible");
@@ -75,8 +76,7 @@ public class TestBase {
         driver.findElement(By.id(loc.getProperty("log_pass"))).sendKeys(input.getProperty("pass"));
         driver.findElement(By.xpath(loc.getProperty("logIn_button"))).click();
 
-        WebElement welcome =
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("welcome_header"))));
+        WebElement welcome = wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("welcome_header"))));
         Assert.assertTrue(welcome.isDisplayed(), "Element is visible");
 
         String actualText = welcome.getText();
@@ -91,7 +91,7 @@ public class TestBase {
         driver.findElement(By.linkText(loc.getProperty("addToCart_link"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.alertIsPresent());
+        wait.until(alertIsPresent());
 
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
@@ -113,21 +113,22 @@ public class TestBase {
 
         String[] products = {"samsung_S6", "nokia_lumia", "nexus"};
 
-        for (String product : products) {
-            driver.findElement(By.linkText(loc.getProperty(product))).click();
-            driver.findElement(By.linkText(loc.getProperty("addToCart_link"))).click();
+        Arrays.stream(products)
+                .forEach(product -> {
+                    driver.findElement(By.linkText(loc.getProperty(product))).click();
+                    driver.findElement(By.linkText(loc.getProperty("addToCart_link"))).click();
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-            wait.until(ExpectedConditions.alertIsPresent());
+                    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+                    wait.until(alertIsPresent());
 
-            Alert alert = driver.switchTo().alert();
-            String alertText = alert.getText();
-            Assert.assertEquals(alertText, loc.getProperty("added_alert").replace(".", ""));
-            alert.accept();
+                    Alert alert = driver.switchTo().alert();
+                    String alertText = alert.getText();
+                    Assert.assertEquals(alertText, loc.getProperty("added_alert").replace(".", ""));
+                    alert.accept();
 
-            driver.navigate().back();
-            driver.navigate().back();
-        }
+                    driver.navigate().back();
+                    driver.navigate().back();
+                });
 
         driver.findElement(By.linkText(loc.getProperty("cart_link"))).click();
 
@@ -140,8 +141,7 @@ public class TestBase {
             WebElement titleName = driver.findElement(By.xpath(xpath));
             String TitleText = titleName.getText();
 
-            boolean found = Arrays.stream(expectedTexts)
-                    .anyMatch(TitleText::contains);
+            boolean found = Arrays.stream(expectedTexts).anyMatch(TitleText::contains);
             String message = "Element text for row " + i + " does not contain any of the expected texts";
             Assert.assertTrue(found, message);
         }
@@ -164,7 +164,7 @@ public class TestBase {
         driver.findElement(By.xpath(loc.getProperty("purchase_link"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("placeOrder_window"))));
+        wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("placeOrder_window"))));
 
         WebElement purchaseSuccess = driver.findElement(By.xpath(loc.getProperty("purchase_success")));
         String purchaseSuccessText = purchaseSuccess.getText();

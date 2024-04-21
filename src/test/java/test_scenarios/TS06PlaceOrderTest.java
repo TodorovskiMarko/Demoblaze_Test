@@ -5,12 +5,13 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class TS06PlaceOrderTest extends TestBase {
 
@@ -56,7 +57,7 @@ public class TS06PlaceOrderTest extends TestBase {
         String alertText = alert.getText();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        wait.until(ExpectedConditions.alertIsPresent());
+        wait.until(alertIsPresent());
 
         Assert.assertEquals(alertText, loc.getProperty("alert_emptyFields"));
     }
@@ -113,13 +114,13 @@ public class TS06PlaceOrderTest extends TestBase {
         driver.findElement(By.xpath(loc.getProperty("placeOrder_link"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("closeOrder_button"))));
+        wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("closeOrder_button"))));
 
         WebElement closeButton = driver.findElement(By.xpath(loc.getProperty("closeOrder_button")));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", closeButton);
 
         driver.findElement(By.xpath(loc.getProperty("closeOrder_button"))).click();
 
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loc.getProperty("placeOrder_window"))));
+        wait.until(invisibilityOfElementLocated(By.xpath(loc.getProperty("placeOrder_window"))));
     }
 }

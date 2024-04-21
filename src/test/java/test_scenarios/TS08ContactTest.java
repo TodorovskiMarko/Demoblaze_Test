@@ -3,19 +3,20 @@ package test_scenarios;
 import base.TestBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class TS08ContactTest extends TestBase {
     private static void sendMessage(String email, String name, String message, String expectedAlertMessage) {
         driver.findElement(By.linkText(loc.getProperty("contact_link"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(loc.getProperty("contactEmail_field"))));
+        wait.until(visibilityOfElementLocated(By.id(loc.getProperty("contactEmail_field"))));
 
         driver.findElement(By.id(loc.getProperty("contactEmail_field"))).sendKeys(input.getProperty(email));
         driver.findElement(By.id(loc.getProperty("contactName_field"))).sendKeys(input.getProperty(name));
@@ -23,7 +24,7 @@ public class TS08ContactTest extends TestBase {
 
         driver.findElement(By.xpath(loc.getProperty("send_message"))).click();
 
-        wait.until(ExpectedConditions.alertIsPresent());
+        wait.until(alertIsPresent());
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
         System.out.println(alertText);
@@ -56,12 +57,12 @@ public class TS08ContactTest extends TestBase {
         driver.findElement(By.linkText(loc.getProperty("contact_link"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(loc.getProperty("contactEmail_field"))));
+        wait.until(visibilityOfElementLocated(By.id(loc.getProperty("contactEmail_field"))));
 
         driver.findElement(By.xpath(loc.getProperty("contact_close"))).click();
 
         boolean isWindowClosed =
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className(loc.getProperty("contact_window"))));
+                wait.until(invisibilityOfElementLocated(By.className(loc.getProperty("contact_window"))));
         Assert.assertTrue(isWindowClosed, "Window is no longer visible");
     }
 }

@@ -3,7 +3,6 @@ package test_scenarios;
 import base.TestBase;
 import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -14,14 +13,15 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.time.Duration;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class TS02LoginFunctionalityTest extends TestBase {
 
     public static void ClickOnLogIn() {
         driver.findElement(By.linkText(loc.getProperty("logIn_link"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        WebElement signUpWindow =
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("logIn_window"))));
+        WebElement signUpWindow = wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("logIn_window"))));
 
         // Assert that Log in window is visible
         if (signUpWindow.isDisplayed()) {
@@ -54,8 +54,7 @@ public class TS02LoginFunctionalityTest extends TestBase {
 
     public static void WaitForWelcome() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
-        WebElement welcome =
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("welcome_header"))));
+        WebElement welcome = wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("welcome_header"))));
         Assert.assertTrue(welcome.isDisplayed(), "Element is visible");
 
         String actualText = welcome.getText();
@@ -65,7 +64,7 @@ public class TS02LoginFunctionalityTest extends TestBase {
 
     public static void WaitForAlert() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.alertIsPresent());
+        wait.until(alertIsPresent());
     }
 
     @Test(description = "Validate logging in with valid credentials")
@@ -278,8 +277,7 @@ public class TS02LoginFunctionalityTest extends TestBase {
         driver.findElement(By.xpath(loc.getProperty("logIn_close"))).click();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        boolean isWindowClosed =
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loc.getProperty("logIn_window"))));
+        boolean isWindowClosed = wait.until(invisibilityOfElementLocated(By.xpath(loc.getProperty("logIn_window"))));
 
         Assert.assertTrue(isWindowClosed, "Window is no longer visible");
     }

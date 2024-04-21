@@ -63,7 +63,7 @@ public class TS07HomePageTest extends TestBase {
         AddToCart();
         PlaceOrder();
 
-        driver.findElement(By.xpath("//button[normalize-space()='OK']")).click();
+        driver.findElement(By.xpath(loc.getProperty("purchaseOk_button"))).click();
 
         HomePage();
     }

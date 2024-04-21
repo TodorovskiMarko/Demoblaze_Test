@@ -5,7 +5,6 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -16,6 +15,8 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.time.Duration;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class TS01SignUpFunctionalityTest extends TestBase {
 
     public static void SignUp() {
@@ -23,7 +24,7 @@ public class TS01SignUpFunctionalityTest extends TestBase {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         WebElement signUpWindow =
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("signUp_Window"))));
+                wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("signUp_Window"))));
 
         // Assert that Sign Up Window is visible
         if (signUpWindow.isDisplayed()) {
@@ -35,7 +36,7 @@ public class TS01SignUpFunctionalityTest extends TestBase {
         driver.findElement(By.id(loc.getProperty("username_Field"))).sendKeys(input.getProperty("user"));
         driver.findElement(By.id(loc.getProperty("password_Field"))).sendKeys(input.getProperty("pass"));
         driver.findElement(By.xpath(loc.getProperty("signUp_button"))).click();
-        wait.until(ExpectedConditions.alertIsPresent());
+        wait.until(alertIsPresent());
     }
 
     public static void ClickOnSignUp() {
@@ -43,7 +44,7 @@ public class TS01SignUpFunctionalityTest extends TestBase {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         WebElement signUpWindow =
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(loc.getProperty("signUp_Window"))));
+                wait.until(visibilityOfElementLocated(By.xpath(loc.getProperty("signUp_Window"))));
 
         // Assert that Sign Up Window is visible
         if (signUpWindow.isDisplayed()) {
@@ -65,7 +66,7 @@ public class TS01SignUpFunctionalityTest extends TestBase {
 
     public static void WaitForAlert() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.alertIsPresent());
+        wait.until(alertIsPresent());
     }
 
     @Test(description = "Validate Sign Up using new username")
@@ -165,7 +166,7 @@ public class TS01SignUpFunctionalityTest extends TestBase {
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         boolean isWindowClosed =
-                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loc.getProperty("signUp_Window"))));
+                wait.until(invisibilityOfElementLocated(By.xpath(loc.getProperty("signUp_Window"))));
 
         Assert.assertTrue(isWindowClosed, "Window is no longer visible");
     }

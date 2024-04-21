@@ -2,18 +2,19 @@ package test_scenarios;
 
 import base.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
+
 public class TS05CartFunctionalityTest extends TestBase {
 
     public static void EmptyCart() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(loc.getProperty("title_locator"))));
+        wait.until(invisibilityOfElementLocated(By.xpath(loc.getProperty("title_locator"))));
 
         boolean isProductInCart = driver.findElements(By.xpath(loc.getProperty("title_locator"))).isEmpty();
         Assert.assertTrue(isProductInCart, "Cart is not empty");
