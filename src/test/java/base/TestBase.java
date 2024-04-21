@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Properties;
 
 @Listeners(utilities.Listeners.class)
-public class base {
+public class TestBase {
     public static WebDriver driver;
     public static Properties prop = new Properties();
     public static Properties loc = new Properties();

@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TS05CartFunctionalityTest extends base {
+public class TS05CartFunctionalityTest extends TestBase {
 
     public static void EmptyCart() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
@@ -45,7 +45,6 @@ public class TS05CartFunctionalityTest extends base {
     @Test(description = "Validate adding multiple products to cart", priority = 3)
     public static void TC_04() {
         AddingMultipleProductsToCart();
-
     }
 
     @Test(description = "Validate the cart status when there are no products added", priority = 4)

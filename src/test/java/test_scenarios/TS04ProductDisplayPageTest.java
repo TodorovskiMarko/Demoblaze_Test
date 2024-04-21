@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TS04ProductDisplayPageTest extends base {
+public class TS04ProductDisplayPageTest extends TestBase {
 
     @Test(description = "Validate that the proper product names are displayed after clicking on a product")
     public static void TC_01() {

@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -16,7 +16,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.time.Duration;
 
-public class TS01SignUpFunctionalityTest extends base {
+public class TS01SignUpFunctionalityTest extends TestBase {
 
     public static void SignUp() {
         driver.findElement(By.linkText(loc.getProperty("signUp_Link"))).click();

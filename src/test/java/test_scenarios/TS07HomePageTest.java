@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
-public class TS07HomePageTest extends base {
+public class TS07HomePageTest extends TestBase {
 
     public static void HomePage() {
         WebElement products = driver.findElement(By.id(loc.getProperty("homePage_products")));

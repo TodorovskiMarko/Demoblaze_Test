@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.*;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +14,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.time.Duration;
 
-public class TS02LoginFunctionalityTest extends base {
+public class TS02LoginFunctionalityTest extends TestBase {
 
     public static void ClickOnLogIn() {
         driver.findElement(By.linkText(loc.getProperty("logIn_link"))).click();

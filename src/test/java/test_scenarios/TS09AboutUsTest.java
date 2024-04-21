@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TS09AboutUsTest extends base {
+public class TS09AboutUsTest extends TestBase {
     @Test(description = "Validate that the correct video is displayed when you click the 'About us' header link")
     public static void TC_01() {
         driver.findElement(By.linkText(loc.getProperty("aboutUs_link"))).click();

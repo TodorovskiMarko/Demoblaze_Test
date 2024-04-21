@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TS06PlaceOrderTest extends base {
+public class TS06PlaceOrderTest extends TestBase {
 
     @Test(description = "Validate placing an order after adding a product to cart")
     public static void TC_01() {

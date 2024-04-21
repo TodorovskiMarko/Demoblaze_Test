@@ -1,6 +1,6 @@
 package test_scenarios;
 
-import base.base;
+import base.TestBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class TS08ContactTest extends base {
+public class TS08ContactTest extends TestBase {
     private static void sendMessage(String email, String name, String message, String expectedAlertMessage) {
         driver.findElement(By.linkText(loc.getProperty("contact_link"))).click();
 
